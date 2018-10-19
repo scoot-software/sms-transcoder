@@ -26,3 +26,12 @@ sudo apt-get install \
     beignet \
     beignet-opencl-icd
 ```
+
+## Build
+``` bash
+git clone https://github.com/scoot-software/sms-transcoder.git
+cd sms-transcoder
+./build.sh
+sudo ./build.sh -i
+```
+
