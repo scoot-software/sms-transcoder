@@ -171,15 +171,24 @@ install () {
     make install
 }
 
-while getopts ':i' OPTION
+clean () {
+    echo "*** Cleaning build directories ***"
+    rm -rf "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
+}
+
+while getopts ':ic' OPTION
 do
   case $OPTION in
   i)
       install
       exit 0
       ;;
+  c)
+      clean
+      exit 0
+      ;;
   ?)
-      printf "Usage: %s [-i]\n" $(basename $0) >&2
+      printf "Usage: %s [-i] [-c]\n" $(basename $0) >&2
       exit 2
       ;;
   esac
