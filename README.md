@@ -5,18 +5,24 @@ Scoot Media Streamer uses FFmpeg to parse and transcode media. You can follow th
 ### Ubuntu
 ``` bash
 sudo apt-get install \
-    build-essential \
-    tar \
-    unzip \
-    libtool \
-    cmake \
-    automake \
     autoconf \
-    pkg-config \
-    wget \
+    automake \
+    build-essential \
+    cmake \
+    libfdk-aac-dev \
+    libmp3lame-dev \
+    libogg-dev \
+    libtool \
     libva-dev \
+    libvorbis-dev \
+    libx264-dev \
+    libx265-dev \
     ocl-icd-opencl-dev \
     opencl-headers
+    pkg-config \
+    tar \
+    unzip \
+    wget
 ```
 
 ## Optional Dependencies
