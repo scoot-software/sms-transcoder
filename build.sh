@@ -61,6 +61,7 @@ build () {
     PATH="$BIN_DIR:$PATH" PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
+    --enable-shared \
     --disable-debug \
     --enable-pic \
     --enable-gpl \
