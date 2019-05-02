@@ -103,6 +103,7 @@ install () {
     echo "*** Install FFmpeg ***"
     cd $BUILD_DIR/FFmpeg*
     make install
+    ldconfig
 }
 
 clean () {
