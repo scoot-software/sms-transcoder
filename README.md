@@ -19,7 +19,7 @@ sudo apt-get install \
     libx264-dev \
     libx265-dev \
     ocl-icd-opencl-dev \
-    opencl-headers
+    opencl-headers \
     pkg-config \
     tar \
     unzip \
