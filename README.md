@@ -22,8 +22,10 @@ sudo apt-get install \
     opencl-headers \
     pkg-config \
     tar \
+    texinfo \
     unzip \
-    wget
+    wget \
+    zlib1g-dev
 ```
 
 ## Optional Dependencies
