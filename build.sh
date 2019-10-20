@@ -18,20 +18,24 @@ PATH="${TARGET_DIR}/bin:${PATH}"
 # Download
 download () {
     echo "*** Downloading Yasm ***"
-    wget -N http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz -P "$DOWNLOAD_DIR"
-    tar -xf "$DOWNLOAD_DIR"/yasm-1.3.0.tar.gz -C "$BUILD_DIR"
+    wget -N http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz -O "$DOWNLOAD_DIR"/yasm.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/yasm.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading Nasm ***"
-    wget -N https://www.nasm.us/pub/nasm/releasebuilds/2.13.03/nasm-2.13.03.tar.gz -P "$DOWNLOAD_DIR"
-    tar -xf "$DOWNLOAD_DIR"/nasm-2.13.03.tar.gz -C "$BUILD_DIR"
+    wget -N https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.gz -O "$DOWNLOAD_DIR"/nasm.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/nasm.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading NVIDIA Headers ***"
-    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n8.1.24.2/nv-codec-headers-8.1.24.2.tar.gz -P "$DOWNLOAD_DIR"
-    tar -xf "$DOWNLOAD_DIR"/nv-codec-headers-8.1.24.2.tar.gz -C "$BUILD_DIR"
+    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n9.1.23.0/nv-codec-headers-9.1.23.0.tar.gz -O "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz -C "$BUILD_DIR"
+    
+    echo "*** Downloading zimg ***"
+    wget -N https://github.com/sekrit-twc/zimg/archive/release-2.9.2.tar.gz -O "$DOWNLOAD_DIR"/zimg.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/zimg.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading FFmpeg ***"
-    wget -N https://github.com/FFmpeg/FFmpeg/archive/n4.1.3.tar.gz -O "$DOWNLOAD_DIR"/ffmpeg.tar.gz
-    tar -xf "$DOWNLOAD_DIR"/ffmpeg.tar.gz -C "$BUILD_DIR"
+    wget -N https://github.com/FFmpeg/FFmpeg/archive/n4.2.1.zip -O "$DOWNLOAD_DIR"/ffmpeg.zip
+    unzip "$DOWNLOAD_DIR"/ffmpeg.zip -d "$BUILD_DIR"
 }
 
 # Build
@@ -50,10 +54,19 @@ build () {
     make
     make install
 
+    # Nvidia Headers
     echo "*** Building NVIDIA Headers ***"
     cd $BUILD_DIR/nv-codec-headers*
     make PREFIX=$TARGET_DIR
     make install PREFIX=$TARGET_DIR
+    
+    # zimg
+    echo "*** Building zimg ***"
+    cd $BUILD_DIR/zimg*
+    ./autogen.sh
+    ./configure --prefix=$TARGET_DIR --disable-shared --enable-static
+    make
+    make install
 
     # FFmpeg
     echo "*** Building FFmpeg ***"
@@ -61,7 +74,8 @@ build () {
     PATH="$BIN_DIR:$PATH" PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
-    --enable-shared \
+    --extra-libs="-lpthread -lm -lz" \
+    --pkg-config-flags="--static" \
     --disable-debug \
     --enable-pic \
     --enable-gpl \
@@ -93,6 +107,7 @@ build () {
     --disable-sdl2 \
     --disable-securetransport \
     --disable-xlib \
+    --enable-libzimg \
     --disable-zlib
 
     PATH="$BIN_DIR:$PATH" make -j 4

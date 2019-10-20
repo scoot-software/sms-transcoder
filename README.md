@@ -11,6 +11,7 @@ sudo apt-get install \
     cmake \
     libfdk-aac-dev \
     libmp3lame-dev \
+    libnuma-dev \
     libogg-dev \
     libtool \
     libva-dev \
