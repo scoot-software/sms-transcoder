@@ -32,6 +32,10 @@ download () {
     echo "*** Downloading zimg ***"
     wget -N https://github.com/sekrit-twc/zimg/archive/release-2.9.2.tar.gz -O "$DOWNLOAD_DIR"/zimg.tar.gz
     tar -xf "$DOWNLOAD_DIR"/zimg.tar.gz -C "$BUILD_DIR"
+    
+    echo "*** Downloading x265 ***"
+    wget -N https://bitbucket.org/multicoreware/x265/downloads/x265_3.2.tar.gz -O "$DOWNLOAD_DIR"/x265.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/x265.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading FFmpeg ***"
     wget -N https://github.com/FFmpeg/FFmpeg/archive/n4.2.1.zip -O "$DOWNLOAD_DIR"/ffmpeg.zip
@@ -66,6 +70,13 @@ build () {
     ./autogen.sh
     ./configure --prefix=$TARGET_DIR --disable-shared --enable-static
     make
+    make install
+    
+    # x265
+    echo "*** Building x265 ***"
+    cd $BUILD_DIR/x265*/build/linux
+    PATH="$BIN_DIR:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$TARGET_DIR" -DENABLE_SHARED=off ../../source
+    PATH="$BIN_DIR:$PATH" make
     make install
 
     # FFmpeg

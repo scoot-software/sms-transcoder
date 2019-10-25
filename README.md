@@ -17,7 +17,6 @@ sudo apt-get install \
     libva-dev \
     libvorbis-dev \
     libx264-dev \
-    libx265-dev \
     ocl-icd-opencl-dev \
     opencl-headers \
     pkg-config \
