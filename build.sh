@@ -24,9 +24,9 @@ download () {
     echo "*** Downloading Nasm ***"
     wget -N https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.gz -O "$DOWNLOAD_DIR"/nasm.tar.gz
     tar -xf "$DOWNLOAD_DIR"/nasm.tar.gz -C "$BUILD_DIR"
-
+    
     echo "*** Downloading NVIDIA Headers ***"
-    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n9.1.23.0/nv-codec-headers-9.1.23.0.tar.gz -O "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz
+    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n9.1.23.1/nv-codec-headers-9.1.23.1.tar.gz -O "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz
     tar -xf "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz -C "$BUILD_DIR"
     
     echo "*** Downloading zimg ***"
