@@ -96,7 +96,7 @@ build () {
     --disable-manpages \
     --disable-podpages \
     --disable-txtpages \
-    --disable-indevs \
+    --enable-indev=lavfi \
     --disable-outdevs \
     --enable-cuvid \
     --enable-vaapi \
