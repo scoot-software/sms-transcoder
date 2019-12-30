@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 set -u
@@ -14,6 +14,41 @@ LDFLAGS="-L${TARGET_DIR}/lib"
 PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig"
 CFLAGS="-I${TARGET_DIR}/include $LDFLAGS"
 PATH="${TARGET_DIR}/bin:${PATH}"
+
+FFMPEG_CONFIG="\
+    --disable-debug \
+    --enable-pic \
+    --enable-gpl \
+    --enable-nonfree \
+    --disable-doc \
+    --disable-htmlpages \
+    --disable-manpages \
+    --disable-podpages \
+    --disable-txtpages \
+    --disable-indevs \
+    --disable-outdevs \
+    --enable-vaapi \
+    --disable-alsa \
+    --disable-appkit \
+    --disable-avfoundation \
+    --disable-bzlib \
+    --disable-coreimage \
+    --disable-iconv \
+    --enable-libfdk-aac \
+    --enable-libmp3lame \
+    --enable-libvorbis \
+    --enable-libx264 \
+    --enable-libx265 \
+    --disable-lzma \
+    --enable-opencl \
+    --disable-sndio \
+    --disable-schannel \
+    --disable-sdl2 \
+    --disable-securetransport \
+    --disable-xlib \
+    --enable-libzimg \
+    --disable-zlib
+"
 
 # Download
 download () {
@@ -87,39 +122,7 @@ build () {
     --extra-ldflags="-L$TARGET_DIR/lib" \
     --extra-libs="-lpthread -lm -lz" \
     --pkg-config-flags="--static" \
-    --disable-debug \
-    --enable-pic \
-    --enable-gpl \
-    --enable-nonfree \
-    --disable-doc \
-    --disable-htmlpages \
-    --disable-manpages \
-    --disable-podpages \
-    --disable-txtpages \
-    --enable-indev=lavfi \
-    --disable-outdevs \
-    --enable-cuvid \
-    --enable-vaapi \
-    --disable-alsa \
-    --disable-appkit \
-    --disable-avfoundation \
-    --disable-bzlib \
-    --disable-coreimage \
-    --disable-iconv \
-    --enable-libfdk-aac \
-    --enable-libmp3lame \
-    --enable-libvorbis \
-    --enable-libx264 \
-    --enable-libx265 \
-    --disable-lzma \
-    --enable-opencl \
-    --disable-sndio \
-    --disable-schannel \
-    --disable-sdl2 \
-    --disable-securetransport \
-    --disable-xlib \
-    --enable-libzimg \
-    --disable-zlib
+    ${FFMPEG_CONFIG}
 
     PATH="$BIN_DIR:$PATH" make -j 4
 }
@@ -137,7 +140,7 @@ clean () {
     rm -rf "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 }
 
-while getopts ':ic' OPTION
+while getopts ':ico:' OPTION
 do
   case $OPTION in
   i)
@@ -148,8 +151,13 @@ do
       clean
       exit 0
       ;;
+  o)
+      if [[ $OPTARG == *"nvidia"* ]]; then
+          FFMPEG_CONFIG+=" --enable-cuvid --enable-libnpp"
+      fi
+      ;;
   ?)
-      printf "Usage: %s [-i] [-c]\n" $(basename $0) >&2
+      printf "Usage: %s [-i] [-c] [-o nvidia]\n" $(basename $0) >&2
       exit 2
       ;;
   esac

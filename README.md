@@ -35,11 +35,16 @@ sudo apt-get install \
     beignet-opencl-icd
 ```
 
+### Nvidia CUDA Support
+``` bash
+sudo apt-get install \
+    nvidia-cuda-dev
+```
+
 ## Build
 ``` bash
 git clone https://github.com/scoot-software/sms-transcoder.git
 cd sms-transcoder
-./build.sh
+./build.sh -o nvidia (-o is optional)
 sudo ./build.sh -i
 ```
-
