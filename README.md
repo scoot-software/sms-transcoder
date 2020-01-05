@@ -38,7 +38,7 @@ sudo apt-get install \
 ### Nvidia CUDA Support
 ``` bash
 sudo apt-get install \
-    nvidia-cuda-dev
+    nvidia-cuda-toolkit
 ```
 
 ## Build

@@ -153,7 +153,7 @@ do
       ;;
   o)
       if [[ $OPTARG == *"nvidia"* ]]; then
-          FFMPEG_CONFIG+=" --enable-cuvid --enable-libnpp"
+          FFMPEG_CONFIG+=" --enable-cuvid --enable-cuda-nvcc"
       fi
       ;;
   ?)
