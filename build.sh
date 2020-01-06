@@ -83,14 +83,14 @@ build () {
     echo "*** Building Yasm ***"
     cd $BUILD_DIR/yasm*
     ./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR
-    make
+    make -j$(nproc)
     make install
 
     # Nasm
     echo "*** Building Nasm ***"
     cd $BUILD_DIR/nasm*
     ./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR
-    make
+    make -j$(nproc)
     make install
 
     # Nvidia Headers
@@ -104,14 +104,14 @@ build () {
     cd $BUILD_DIR/zimg*
     ./autogen.sh
     ./configure --prefix=$TARGET_DIR --disable-shared --enable-static
-    make
+    make -j$(nproc)
     make install
     
     # x265
     echo "*** Building x265 ***"
     cd $BUILD_DIR/x265*/build/linux
     PATH="$BIN_DIR:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$TARGET_DIR" -DENABLE_SHARED=off ../../source
-    PATH="$BIN_DIR:$PATH" make
+    PATH="$BIN_DIR:$PATH" make -j$(nproc)
     make install
 
     # FFmpeg
@@ -124,7 +124,7 @@ build () {
     --pkg-config-flags="--static" \
     ${FFMPEG_CONFIG}
 
-    PATH="$BIN_DIR:$PATH" make -j 4
+    PATH="$BIN_DIR:$PATH" make -j$(nproc)
 }
 
 install () {
