@@ -69,7 +69,7 @@ download () {
     tar -xf "$DOWNLOAD_DIR"/zimg.tar.gz -C "$BUILD_DIR"
     
     echo "*** Downloading x265 ***"
-    wget -N https://bitbucket.org/multicoreware/x265/downloads/x265_3.2.tar.gz -O "$DOWNLOAD_DIR"/x265.tar.gz
+    wget -N https://github.com/videolan/x265/archive/3.2.tar.gz -O "$DOWNLOAD_DIR"/x265.tar.gz
     tar -xf "$DOWNLOAD_DIR"/x265.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading FFmpeg ***"
@@ -153,7 +153,7 @@ do
       ;;
   o)
       if [[ $OPTARG == *"nvidia"* ]]; then
-          FFMPEG_CONFIG+=" --enable-cuvid --enable-cuda-nvcc"
+          FFMPEG_CONFIG+=" --enable-cuda-llvm"
       fi
       ;;
   ?)

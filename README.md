@@ -8,6 +8,7 @@ sudo apt-get install \
     autoconf \
     automake \
     build-essential \
+    clang \
     cmake \
     libfdk-aac-dev \
     libmp3lame-dev \
@@ -33,12 +34,6 @@ sudo apt-get install \
 sudo apt-get install \
     beignet \
     beignet-opencl-icd
-```
-
-### Nvidia CUDA Support
-``` bash
-sudo apt-get install \
-    nvidia-cuda-toolkit
 ```
 
 ## Build
