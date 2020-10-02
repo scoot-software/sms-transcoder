@@ -57,24 +57,24 @@ download () {
     tar -xf "$DOWNLOAD_DIR"/yasm.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading Nasm ***"
-    wget -N https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.gz -O "$DOWNLOAD_DIR"/nasm.tar.gz
+    wget -N https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.gz -O "$DOWNLOAD_DIR"/nasm.tar.gz
     tar -xf "$DOWNLOAD_DIR"/nasm.tar.gz -C "$BUILD_DIR"
     
     echo "*** Downloading NVIDIA Headers ***"
-    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n9.1.23.1/nv-codec-headers-9.1.23.1.tar.gz -O "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz
+    wget -N https://github.com/FFmpeg/nv-codec-headers/releases/download/n10.0.26.1/nv-codec-headers-10.0.26.1.tar.gz -O "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz
     tar -xf "$DOWNLOAD_DIR"/nv-codec-headers.tar.gz -C "$BUILD_DIR"
     
     echo "*** Downloading zimg ***"
-    wget -N https://github.com/sekrit-twc/zimg/archive/release-2.9.2.tar.gz -O "$DOWNLOAD_DIR"/zimg.tar.gz
+    wget -N https://github.com/sekrit-twc/zimg/archive/release-3.0.1.tar.gz -O "$DOWNLOAD_DIR"/zimg.tar.gz
     tar -xf "$DOWNLOAD_DIR"/zimg.tar.gz -C "$BUILD_DIR"
     
     echo "*** Downloading x265 ***"
-    wget -N https://github.com/videolan/x265/archive/3.2.tar.gz -O "$DOWNLOAD_DIR"/x265.tar.gz
+    wget -N https://github.com/videolan/x265/archive/3.4.tar.gz -O "$DOWNLOAD_DIR"/x265.tar.gz
     tar -xf "$DOWNLOAD_DIR"/x265.tar.gz -C "$BUILD_DIR"
 
     echo "*** Downloading FFmpeg ***"
-    wget -N https://github.com/FFmpeg/FFmpeg/archive/n4.2.1.zip -O "$DOWNLOAD_DIR"/ffmpeg.zip
-    unzip "$DOWNLOAD_DIR"/ffmpeg.zip -d "$BUILD_DIR"
+    wget -N https://github.com/FFmpeg/FFmpeg/archive/n4.3.1.tar.gz -O "$DOWNLOAD_DIR"/ffmpeg.tar.gz
+    tar -xf "$DOWNLOAD_DIR"/ffmpeg.tar.gz -C "$BUILD_DIR"
 }
 
 # Build
