@@ -153,7 +153,7 @@ do
       ;;
   o)
       if [[ $OPTARG == *"nvidia"* ]]; then
-          FFMPEG_CONFIG+=" --enable-cuda-llvm"
+          FFMPEG_CONFIG+=" --enable-cuda-llvm --enable-nvenc"
       fi
       ;;
   ?)
