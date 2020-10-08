@@ -30,11 +30,7 @@ sudo apt-get install \
 
 ## Optional Dependencies
 ### Intel OpenCL Support
-``` bash
-sudo apt-get install \
-    beignet \
-    beignet-opencl-icd
-```
+You can find instructions for installing the Intel OpenCL Runtime for your Linux distribution [HERE](https://github.com/intel/compute-runtime/blob/master/opencl/doc/DISTRIBUTIONS.md)
 
 ## Build
 ``` bash
